@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SAWService {
+public class WPService {
     public SAWResponse execute(DSSRequest request) {
         // calculate normalization
         BigDecimal[][] norm = DSSUtil.maxOrMinNormalization(request);
