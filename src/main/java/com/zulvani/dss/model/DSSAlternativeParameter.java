@@ -14,4 +14,6 @@ import java.math.BigDecimal;
 public class DSSAlternativeParameter {
     private String alternativeName;
     private BigDecimal[] parameterValues;
+    private int rank;
+    private BigDecimal dssPoint;
 }
