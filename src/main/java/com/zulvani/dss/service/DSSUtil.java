@@ -52,8 +52,23 @@ public class DSSUtil {
                 }
             }
         }
-
         return result;
+    }
+
+    public static BigDecimal[] weightNormalization(DSSRequest request){
+        BigDecimal total = BigDecimal.ZERO;
+        for(int i=0; i < request.getWeight().getValues().length; i++) {
+            total = total.add(request.getWeight().getValues()[i]);
+        }
+
+        BigDecimal[] weightNorm = new BigDecimal[request.getWeight().getValues().length];
+        for(int i=0; i < request.getWeight().getValues().length; i++) {
+            weightNorm[i] = request.getWeight().getValues()[i].divide(total, 2, RoundingMode.HALF_UP);
+            if(request.getCriteria()[i].equals(DSSCriteria.DSS_CRITERIA_COST)) {
+                weightNorm[i] = weightNorm[i].negate();
+            }
+        }
+        return weightNorm;
     }
 
     public static BigDecimal[] recalculateWeights(DSSRequest request){

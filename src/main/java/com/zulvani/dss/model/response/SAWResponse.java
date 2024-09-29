@@ -16,6 +16,7 @@ import java.util.List;
 public class SAWResponse {
     private BigDecimal[][] matrixNormalization;
     private BigDecimal[] weights;
+    private BigDecimal[] weightNormalization;
     private BigDecimal[] rank;
     private List<DSSAlternativeParameter> alternativeParameterRanked;
 }
