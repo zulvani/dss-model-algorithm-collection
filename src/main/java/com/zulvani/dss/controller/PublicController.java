@@ -14,6 +14,13 @@ public class PublicController {
     @Autowired
     private DSSService dssService;
 
+    @CrossOrigin(origins = "*")
+
+    @GetMapping("/info")
+    public String hi(){
+        return "dss-v1.0.0";
+    }
+
     //TODO
     @PostMapping("/dss")
     public ResponseEntity<SAWResponse> dssSAW(@RequestBody DSSRequest dssRequest) throws Exception {
