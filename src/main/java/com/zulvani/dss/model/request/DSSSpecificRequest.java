@@ -18,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DSSSpecificRequest {
     private String name;
+    private DSSAlgorithm method;
     private List<DSSParameter> parameters;
 
 }

@@ -59,6 +59,7 @@ public class WPService {
         DSSUtil.assignRank(ranked);
 
         return SAWResponse.builder()
+                .parameters(request.getParameterObjects())
                 .weights(weightNormalization)
                 .rank(dssPoint)
                 .alternativeParameterRanked(ranked)

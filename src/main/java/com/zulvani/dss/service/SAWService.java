@@ -35,6 +35,7 @@ public class SAWService {
         DSSUtil.assignRank(ranked);
 
         return SAWResponse.builder()
+                .parameters(request.getParameterObjects())
                 .matrixNormalization(norm)
                 .weights(weights)
                 .rank(dssPoint)

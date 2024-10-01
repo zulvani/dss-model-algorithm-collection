@@ -44,12 +44,12 @@ public class PublicController {
     public ResponseEntity<BaseResponse> getDss(@PathVariable("name") String name) throws Exception {
         DSSResponse dssResponse = DSSResponse.builder()
                 .parameters(List.of(
-                        DSSParameter.builder().code("P1").name("Jangka Waktu").build(),
-                        DSSParameter.builder().code("P2").name("Return Value").build(),
-                        DSSParameter.builder().code("P3").name("Tingkat Likuiditas").build(),
-                        DSSParameter.builder().code("P4").name("Modal").build(),
-                        DSSParameter.builder().code("P5").name("Pajak").build(),
-                        DSSParameter.builder().code("P6").name("Tingkat Resiko").build()
+                        DSSParameter.builder().code("P1").name("Jangka Waktu").labelMin("Pendek").labelMax("Panjang").build(),
+                        DSSParameter.builder().code("P2").name("Return Value").labelMin("Kecil").labelMax("Besar").build(),
+                        DSSParameter.builder().code("P3").name("Tingkat Likuiditas").labelMin("Sulit").labelMax("Mudah").build(),
+                        DSSParameter.builder().code("P4").name("Modal").labelMin("Kecil").labelMax("Besar").build(),
+                        DSSParameter.builder().code("P5").name("Pajak").labelMin("Kecil").labelMax("Besar").build(),
+                        DSSParameter.builder().code("P6").name("Tingkat Resiko").labelMin("Rendah").labelMax("Tinggi").build()
                         )
                 ).build();
         BaseResponse response = BaseResponse.builder().data(dssResponse).build();
@@ -58,15 +58,34 @@ public class PublicController {
 
     @PostMapping("/dss/{name}")
     public ResponseEntity<SAWResponse> postDss(@PathVariable("name") String name, @RequestBody DSSSpecificRequest request) throws Exception {
+
+        if (request == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        BigDecimal totalWeight = BigDecimal.ZERO;
+        for(DSSParameter param : request.getParameters()){
+            totalWeight = totalWeight.add(param.getAmount());
+        }
+
+        if (totalWeight.compareTo(BigDecimal.valueOf(100)) != 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (request.getMethod() == null){
+            request.setMethod(DSSAlgorithm.SAW);
+        }
+
         DSSRequest dss = DSSRequest.builder()
-                .method(DSSAlgorithm.SAW)
+                .method(request.getMethod())
                 .criteria(new DSSCriteria[]{
-                        DSSCriteria.DSS_CRITERIA_COST,
-                        DSSCriteria.DSS_CRITERIA_BENEFIT,
-                        DSSCriteria.DSS_CRITERIA_BENEFIT,
-                        DSSCriteria.DSS_CRITERIA_COST,
-                        DSSCriteria.DSS_CRITERIA_COST,
-                        DSSCriteria.DSS_CRITERIA_COST})
+                        DSSCriteria.DSS_CRITERIA_COST, // Jangka Panjang
+                        DSSCriteria.DSS_CRITERIA_BENEFIT, // Return Value
+                        DSSCriteria.DSS_CRITERIA_BENEFIT, // Tingkat Likuiditas
+                        DSSCriteria.DSS_CRITERIA_COST, // Modal
+                        DSSCriteria.DSS_CRITERIA_COST, // Pajak
+                        DSSCriteria.DSS_CRITERIA_COST} // Tingkat Resiko
+                )
                 .weight(DSSWeight.builder()
                         .method(DSSWeightMethod.DIRECT)
                         .values(request.getParameters().stream()
@@ -116,10 +135,10 @@ public class PublicController {
                                         BigDecimal.valueOf(10), // Tingkat Resiko
                                 }).build()
                 ))
+                .parameterObjects(request.getParameters())
                 .build();
 
         SAWResponse resp = dssService.execute(dss);
         return ResponseEntity.ok().body(resp);
     }
-
 }

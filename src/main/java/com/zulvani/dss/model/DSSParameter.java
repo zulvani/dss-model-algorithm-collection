@@ -14,5 +14,7 @@ import java.math.BigDecimal;
 public class DSSParameter {
     private String code;
     private String name;
+    private String labelMin;
+    private String labelMax;
     private BigDecimal amount;
 }
