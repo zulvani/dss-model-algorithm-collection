@@ -1,11 +1,10 @@
-package com.zulvani.dss.area.repository;
+package com.zulvani.area.repository;
 
 import java.util.Date;
-import java.util.UUID;
 
-public interface IBaseUUIDRepository<T> {
-    UUID getId();
-    void setId(UUID id);
+public interface IBaseRepository<T> {
+    Long getId();
+    void setId(Long id);
     Date getCreated();
     void setCreated(Date created);
     Date getLastUpdated();
@@ -24,5 +23,5 @@ public interface IBaseUUIDRepository<T> {
     default String getCreatedById(){return null;}
     default String getLastUpdatedById(){return null;}
     default String getDeletedById(){return null;}
-    default <T> Object toDto(){return null;};
+    <T> Object toDto();
 }

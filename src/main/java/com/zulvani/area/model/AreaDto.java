@@ -1,6 +1,6 @@
-package com.zulvani.dss.area.model;
+package com.zulvani.area.model;
 
-import com.zulvani.dss.area.model.cons.AreaType;
+import com.zulvani.area.model.cons.AreaType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

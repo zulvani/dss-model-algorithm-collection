@@ -1,7 +1,7 @@
 package com.zulvani.dss.model.response;
 
 import com.zulvani.dss.model.DSSAlternativeParameter;
-import com.zulvani.dss.model.DSSParameter;
+import com.zulvani.dss.model.dto.DSSParameterDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +20,5 @@ public class SAWResponse {
     private BigDecimal[] weightNormalization;
     private BigDecimal[] rank;
     private List<DSSAlternativeParameter> alternativeParameterRanked;
-    private List<DSSParameter> parameters;
+    private List<DSSParameterDto> parameters;
 }

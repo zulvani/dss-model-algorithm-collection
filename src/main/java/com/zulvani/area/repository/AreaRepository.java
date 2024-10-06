@@ -1,6 +1,6 @@
-package com.zulvani.dss.area.repository;
+package com.zulvani.area.repository;
 
-import com.zulvani.dss.area.model.Area;
+import com.zulvani.area.model.Area;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

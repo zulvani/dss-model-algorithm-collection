@@ -2,7 +2,7 @@ package com.zulvani.dss.controller;
 
 import com.zulvani.dss.core.model.BaseResponse;
 import com.zulvani.dss.model.DSSAlternativeParameter;
-import com.zulvani.dss.model.DSSParameter;
+import com.zulvani.dss.model.dto.DSSParameterDto;
 import com.zulvani.dss.model.DSSWeight;
 import com.zulvani.dss.model.cons.DSSAlgorithm;
 import com.zulvani.dss.model.cons.DSSCriteria;
@@ -44,12 +44,12 @@ public class PublicController {
     public ResponseEntity<BaseResponse> getDss(@PathVariable("name") String name) throws Exception {
         DSSResponse dssResponse = DSSResponse.builder()
                 .parameters(List.of(
-                        DSSParameter.builder().code("P1").name("Jangka Waktu").labelMin("Pendek").labelMax("Panjang").build(),
-                        DSSParameter.builder().code("P2").name("Return Value").labelMin("Kecil").labelMax("Besar").build(),
-                        DSSParameter.builder().code("P3").name("Tingkat Likuiditas").labelMin("Sulit").labelMax("Mudah").build(),
-                        DSSParameter.builder().code("P4").name("Modal").labelMin("Kecil").labelMax("Besar").build(),
-                        DSSParameter.builder().code("P5").name("Pajak").labelMin("Kecil").labelMax("Besar").build(),
-                        DSSParameter.builder().code("P6").name("Tingkat Resiko").labelMin("Rendah").labelMax("Tinggi").build()
+                        DSSParameterDto.builder().code("P1").name("Jangka Waktu").labelMin("Pendek").labelMax("Panjang").build(),
+                        DSSParameterDto.builder().code("P2").name("Return Value").labelMin("Kecil").labelMax("Besar").build(),
+                        DSSParameterDto.builder().code("P3").name("Tingkat Likuiditas").labelMin("Sulit").labelMax("Mudah").build(),
+                        DSSParameterDto.builder().code("P4").name("Modal").labelMin("Kecil").labelMax("Besar").build(),
+                        DSSParameterDto.builder().code("P5").name("Pajak").labelMin("Kecil").labelMax("Besar").build(),
+                        DSSParameterDto.builder().code("P6").name("Tingkat Resiko").labelMin("Rendah").labelMax("Tinggi").build()
                         )
                 ).build();
         BaseResponse response = BaseResponse.builder().data(dssResponse).build();
@@ -64,7 +64,7 @@ public class PublicController {
         }
 
         BigDecimal totalWeight = BigDecimal.ZERO;
-        for(DSSParameter param : request.getParameters()){
+        for(DSSParameterDto param : request.getParameters()){
             totalWeight = totalWeight.add(param.getAmount());
         }
 
@@ -89,10 +89,10 @@ public class PublicController {
                 .weight(DSSWeight.builder()
                         .method(DSSWeightMethod.DIRECT)
                         .values(request.getParameters().stream()
-                                .map(DSSParameter::getAmount)
+                                .map(DSSParameterDto::getAmount)
                                 .toArray(BigDecimal[]::new))
                         .build())
-                .parameters(request.getParameters().stream().map(DSSParameter::getName).toArray(String[]::new))
+                .parameters(request.getParameters().stream().map(DSSParameterDto::getName).toArray(String[]::new))
                 .dssAlternativeParameters(List.of(
                         DSSAlternativeParameter.builder()
                                 .alternativeName("Saham")

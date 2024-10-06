@@ -1,15 +1,16 @@
-package com.zulvani.dss.area.service;
+package com.zulvani.area.service;
 
-import com.zulvani.dss.area.mapper.AreaMapper;
-import com.zulvani.dss.area.model.Area;
-import com.zulvani.dss.area.model.AreaDto;
-import com.zulvani.dss.area.repository.AreaRepository;
+import com.zulvani.area.mapper.AreaMapper;
+import com.zulvani.area.model.Area;
+import com.zulvani.area.model.AreaDto;
+import com.zulvani.area.repository.AreaRepository;
 import com.zulvani.dss.core.service.BaseServiceImpl;
 import jakarta.persistence.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +42,7 @@ public class AreaServiceImpl extends BaseServiceImpl implements AreaService {
         if(area == null){
             throw new PersistenceException("Please enter area which want to delete");
         }
-        area.setDeletedAt(new Date());
+        area.setDeletedAt(Instant.now());
         return areaRepository.save(area);
     }
 

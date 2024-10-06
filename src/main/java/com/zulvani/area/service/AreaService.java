@@ -1,7 +1,7 @@
-package com.zulvani.dss.area.service;
+package com.zulvani.area.service;
 
-import com.zulvani.dss.area.model.Area;
-import com.zulvani.dss.area.model.AreaDto;
+import com.zulvani.area.model.Area;
+import com.zulvani.area.model.AreaDto;
 import jakarta.persistence.PersistenceException;
 
 import java.util.List;

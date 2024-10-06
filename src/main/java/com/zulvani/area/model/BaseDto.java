@@ -1,8 +1,9 @@
-package com.zulvani.dss.area.model;
+package com.zulvani.area.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 public abstract class BaseDto<T> implements IBaseDto<T>, Serializable {
@@ -11,16 +12,16 @@ public abstract class BaseDto<T> implements IBaseDto<T>, Serializable {
     private Long id;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Jakarta")
-    private Date created;
+    private Instant created;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Jakarta")
-    private Date lastUpdated;
+    private Instant lastUpdated;
 
     private Long createdBy;
     private Long lastUpdatedBy;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Jakarta")
-    private Date deletedAt;
+    private Instant deletedAt;
     private Long deletedBy;
 
     private String createdById;
@@ -38,22 +39,22 @@ public abstract class BaseDto<T> implements IBaseDto<T>, Serializable {
     }
 
     @Override
-    public Date getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
     @Override
-    public void setCreated(Date created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 
     @Override
-    public Date getLastUpdated() {
+    public Instant getLastUpdated() {
         return lastUpdated;
     }
 
     @Override
-    public void setLastUpdated(Date lastUpdated) {
+    public void setLastUpdated(Instant lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
@@ -78,12 +79,12 @@ public abstract class BaseDto<T> implements IBaseDto<T>, Serializable {
     }
 
     @Override
-    public Date getDeletedAt() {
+    public Instant getDeletedAt() {
         return deletedAt;
     }
 
     @Override
-    public void setDeletedAt(Date deletedAt) {
+    public void setDeletedAt(Instant deletedAt) {
         this.deletedAt = deletedAt;
     }
 

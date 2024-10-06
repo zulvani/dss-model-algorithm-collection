@@ -1,9 +1,9 @@
-package com.zulvani.dss.area.model;
+package com.zulvani.area.model;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
 @MappedSuperclass
 public abstract class BaseRepository implements Serializable {
@@ -13,10 +13,10 @@ public abstract class BaseRepository implements Serializable {
     private Long id;
 
     @Column
-    private Date created;
+    private Instant created;
 
     @Column(name = "last_updated")
-    private Date lastUpdated;
+    private Instant lastUpdated;
 
     @Column(name = "created_by")
     private Long createdBy;
@@ -25,16 +25,10 @@ public abstract class BaseRepository implements Serializable {
     private Long lastUpdatedBy;
 
     @Column(name = "deleted_at")
-    private Date deletedAt;
+    private Instant deletedAt;
 
     @Column(name = "deleted_by")
     private Long deletedBy;
-
-    @Column(name = "created_by_id")
-    private String createdById;
-
-    @Column(name = "last_updated_by_id")
-    private String lastUpdatedById;
 
     @Column(name = "deleted_by_id")
     private String deletedById;
@@ -42,7 +36,7 @@ public abstract class BaseRepository implements Serializable {
     @PrePersist
     public void prePersist(){
         if(getCreated() == null){
-            setCreated(new Date());
+            setCreated(Instant.now());
         }
     }
 
@@ -54,19 +48,19 @@ public abstract class BaseRepository implements Serializable {
         this.id = id;
     }
 
-    public Date getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Instant created) {
         this.created = created;
     }
 
-    public Date getLastUpdated() {
+    public Instant getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Date lastUpdated) {
+    public void setLastUpdated(Instant lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
@@ -86,11 +80,11 @@ public abstract class BaseRepository implements Serializable {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public Date getDeletedAt() {
+    public Instant getDeletedAt() {
         return deletedAt;
     }
 
-    public void setDeletedAt(Date deletedAt) {
+    public void setDeletedAt(Instant deletedAt) {
         this.deletedAt = deletedAt;
     }
 
@@ -100,22 +94,6 @@ public abstract class BaseRepository implements Serializable {
 
     public void setDeletedBy(Long deletedBy) {
         this.deletedBy = deletedBy;
-    }
-
-    public String getCreatedById() {
-        return createdById;
-    }
-
-    public void setCreatedById(String createdById) {
-        this.createdById = createdById;
-    }
-
-    public String getLastUpdatedById() {
-        return lastUpdatedById;
-    }
-
-    public void setLastUpdatedById(String lastUpdatedById) {
-        this.lastUpdatedById = lastUpdatedById;
     }
 
     public String getDeletedById() {

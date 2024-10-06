@@ -1,7 +1,7 @@
-package com.zulvani.dss.area;
+package com.zulvani.area;
 
-import com.zulvani.dss.area.model.AreaDto;
-import com.zulvani.dss.area.service.AreaService;
+import com.zulvani.area.model.AreaDto;
+import com.zulvani.area.service.AreaService;
 import com.zulvani.dss.core.model.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

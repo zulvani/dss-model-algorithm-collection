@@ -1,8 +1,8 @@
-package com.zulvani.dss.area.mapper;
+package com.zulvani.area.mapper;
 
-import com.zulvani.dss.area.model.Area;
-import com.zulvani.dss.area.model.AreaDto;
-import com.zulvani.dss.area.model.cons.AreaType;
+import com.zulvani.area.model.cons.AreaType;
+import com.zulvani.area.model.Area;
+import com.zulvani.area.model.AreaDto;
 import org.springframework.stereotype.Component;
 
 @Component

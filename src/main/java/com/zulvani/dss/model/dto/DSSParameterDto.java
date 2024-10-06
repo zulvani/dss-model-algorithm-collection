@@ -1,4 +1,4 @@
-package com.zulvani.dss.model;
+package com.zulvani.dss.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,8 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DSSParameter {
+public class DSSParameterDto {
+    private Long id;
     private String code;
     private String name;
     private String labelMin;

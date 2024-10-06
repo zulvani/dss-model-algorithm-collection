@@ -1,20 +1,20 @@
-package com.zulvani.dss.area.model;
+package com.zulvani.area.model;
 
-import java.util.Date;
+import java.time.Instant;
 
 public interface IBaseDto<T> {
     Long getId();
     void setId(Long id);
-    Date getCreated();
-    void setCreated(Date created);
-    Date getLastUpdated();
-    void setLastUpdated(Date lastUpdated);
+    Instant getCreated();
+    void setCreated(Instant created);
+    Instant getLastUpdated();
+    void setLastUpdated(Instant lastUpdated);
     Long getCreatedBy();
     void setCreatedBy(Long createdBy);
     Long getLastUpdatedBy();
     void setLastUpdatedBy(Long lastUpdatedBy);
-    Date getDeletedAt();
-    void setDeletedAt(Date deletedAt);
+    Instant getDeletedAt();
+    void setDeletedAt(Instant deletedAt);
     Long getDeletedBy();
     void setDeletedBy(Long deletedBy);
     default void setCreatedById(String s){}
