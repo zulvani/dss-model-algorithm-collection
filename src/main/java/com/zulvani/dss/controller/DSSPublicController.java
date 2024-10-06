@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/public")
-public class PublicController {
+public class DSSPublicController {
 
     @Autowired
     private DSSService dssService;

@@ -11,10 +11,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DSSParameterDto {
-    private String code;
-    private String name;
-    private String labelMin;
-    private String labelMax;
-    private BigDecimal amount;
+public class DSSParameterValueDto {
+    private String parameterCode;
+    private BigDecimal parameterValue;
 }

@@ -17,8 +17,9 @@ public class DSSProjectDto {
     private List<DSSParameterDto> parameters;
     private String projectName;
     private String description;
+    private List<DSSAlternativeDto> alternatives;
 
-    public DSSProjectDto map(DSSProject project){
+    public DSSProjectDto toDto(DSSProject project){
         if (project == null) {
             return this;
         }

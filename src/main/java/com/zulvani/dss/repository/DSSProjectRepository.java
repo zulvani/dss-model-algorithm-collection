@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DSSTopicRepository extends CrudRepository<DSSProject, Long> {
+public interface DSSProjectRepository extends CrudRepository<DSSProject, Long> {
 
     @Query("FROM DSSProject ORDER BY ID DESC")
     List<DSSProject> search();
