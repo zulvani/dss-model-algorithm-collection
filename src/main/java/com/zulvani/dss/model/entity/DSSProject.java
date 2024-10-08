@@ -1,10 +1,9 @@
 package com.zulvani.dss.model.entity;
 
 import com.zulvani.area.model.BaseRepository;
+import com.zulvani.dss.model.cons.DSSAlgorithm;
 import com.zulvani.dss.model.dto.DSSParameterDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -22,6 +21,10 @@ public class DSSProject extends BaseRepository {
 
     @Column
     private String projectName;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private DSSAlgorithm dssMethod;
 
     @Column
     private String description;

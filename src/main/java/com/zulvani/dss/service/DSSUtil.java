@@ -6,7 +6,6 @@ import com.zulvani.dss.model.request.DSSRequest;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class DSSUtil {
             for(int i = 0; i < rowCount; i++) {
                 BigDecimal temp = request.getDssAlternativeParameters().get(i).getParameterValues()[j];
 
-                if (request.getCriteria()[j].equals(DSSCriteria.DSS_CRITERIA_BENEFIT)) {
+                if (request.getCriteria()[j].equals(DSSCriteria.BENEFIT)) {
                     if (i == 0) {
                         maxOrMin[j] = temp;
                     } else {
@@ -45,7 +44,7 @@ public class DSSUtil {
             for(int i = 0; i < rowCount; i++) {
                 BigDecimal temp = request.getDssAlternativeParameters().get(i).getParameterValues()[j];
 
-                if (request.getCriteria()[j].equals(DSSCriteria.DSS_CRITERIA_BENEFIT)) {
+                if (request.getCriteria()[j].equals(DSSCriteria.BENEFIT)) {
                     result[i][j] = temp.divide(maxOrMin[j], 2, RoundingMode.HALF_UP);
                 } else {
                     result[i][j] = maxOrMin[j].divide(temp, 2, RoundingMode.HALF_UP);
@@ -64,7 +63,7 @@ public class DSSUtil {
         BigDecimal[] weightNorm = new BigDecimal[request.getWeight().getValues().length];
         for(int i=0; i < request.getWeight().getValues().length; i++) {
             weightNorm[i] = request.getWeight().getValues()[i].divide(total, 2, RoundingMode.HALF_UP);
-            if(request.getCriteria()[i].equals(DSSCriteria.DSS_CRITERIA_COST)) {
+            if(request.getCriteria()[i].equals(DSSCriteria.COST)) {
                 weightNorm[i] = weightNorm[i].negate();
             }
         }

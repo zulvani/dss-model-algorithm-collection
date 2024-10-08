@@ -2,6 +2,7 @@ package com.zulvani.dss.service;
 
 import com.zulvani.dss.model.DSSAlternativeParameter;
 import com.zulvani.dss.model.cons.DSSCriteria;
+import com.zulvani.dss.model.dto.DSSStep;
 import com.zulvani.dss.model.request.DSSRequest;
 import com.zulvani.dss.model.response.SAWResponse;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,14 @@ public class WPService {
     }
 
     public SAWResponse execute(DSSRequest request) {
+        List<DSSStep> steps = new ArrayList<>();
+
         // calculate weight normalization
         BigDecimal[] weightNormalization = DSSUtil.weightNormalization(request);
+        steps.add(DSSStep.builder()
+                        .stepName("Calculate Weight Normalization (W\')")
+                        .data(weightNormalization)
+                .build());
 
         BigDecimal[] alternative = new BigDecimal[request.getDssAlternativeParameters().size()];
         BigDecimal total = BigDecimal.ZERO;
@@ -46,6 +53,11 @@ public class WPService {
             total = total.add(alternative[i]);
         }
 
+        steps.add(DSSStep.builder()
+                .stepName("Calculate Alternative Preference (S)")
+                .data(alternative)
+                .build());
+
         // rank
         List<DSSAlternativeParameter> ranked = new ArrayList<>();
 
@@ -58,11 +70,17 @@ public class WPService {
         }
         DSSUtil.assignRank(ranked);
 
+        steps.add(DSSStep.builder()
+                .stepName("Calculate Point")
+                .data(dssPoint)
+                .build());
+
         return SAWResponse.builder()
                 .parameters(request.getParameterObjects())
                 .weights(weightNormalization)
                 .rank(dssPoint)
                 .alternativeParameterRanked(ranked)
+                .steps(steps)
                 .build();
     }
 }

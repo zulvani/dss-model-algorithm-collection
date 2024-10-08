@@ -1,5 +1,6 @@
 package com.zulvani.dss.model.dto;
 
+import com.zulvani.dss.model.cons.DSSAlgorithm;
 import com.zulvani.dss.model.entity.DSSProject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ public class DSSProjectDto {
     private Long id;
     private List<DSSParameterDto> parameters;
     private String projectName;
+    private DSSAlgorithm dssMethod;
     private String description;
     private List<DSSAlternativeDto> alternatives;
 
@@ -28,6 +30,7 @@ public class DSSProjectDto {
         setParameters(project.getParameters());
         setDescription(project.getDescription());
         setId(project.getId());
+        setDssMethod(project.getDssMethod());
         return this;
     }
 }

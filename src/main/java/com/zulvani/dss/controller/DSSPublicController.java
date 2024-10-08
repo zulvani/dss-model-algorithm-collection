@@ -79,12 +79,12 @@ public class DSSPublicController {
         DSSRequest dss = DSSRequest.builder()
                 .method(request.getMethod())
                 .criteria(new DSSCriteria[]{
-                        DSSCriteria.DSS_CRITERIA_COST, // Jangka Panjang
-                        DSSCriteria.DSS_CRITERIA_BENEFIT, // Return Value
-                        DSSCriteria.DSS_CRITERIA_BENEFIT, // Tingkat Likuiditas
-                        DSSCriteria.DSS_CRITERIA_COST, // Modal
-                        DSSCriteria.DSS_CRITERIA_COST, // Pajak
-                        DSSCriteria.DSS_CRITERIA_COST} // Tingkat Resiko
+                        DSSCriteria.COST, // Jangka Panjang
+                        DSSCriteria.BENEFIT, // Return Value
+                        DSSCriteria.BENEFIT, // Tingkat Likuiditas
+                        DSSCriteria.COST, // Modal
+                        DSSCriteria.COST, // Pajak
+                        DSSCriteria.COST} // Tingkat Resiko
                 )
                 .weight(DSSWeight.builder()
                         .method(DSSWeightMethod.DIRECT)

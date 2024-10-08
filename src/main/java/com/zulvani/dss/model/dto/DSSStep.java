@@ -5,14 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DSSParameterValueDto {
-    private String parameterCode;
-    private String parameterName;
-    private BigDecimal parameterValue;
+public class DSSStep {
+    private String stepName;
+    private Object data;
 }
